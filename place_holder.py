@@ -6,4 +6,10 @@ replication_server = 6002
 no_of_replication_servers = 2
 replication_server_copies = 5
 write_file = "write_file:{}\nclient:{}\ndata:{}"
-#WRITE_FILE = 'WRITE_FILE: {}\nCLIENT: {}\nDATA: {}\n\n'
+
+lock_server = 6005
+lock_attempts = 1
+
+requested_lock = "Requested_Lock:{}\nClient:{}"
+requested_use = "Requested_Use:{}\nClient:{}"
+requested_unlock = "Requested_Unlock:{}\nClient:{}"
