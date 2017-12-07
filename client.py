@@ -35,9 +35,13 @@ print("file_ip",file_ip)
 print("file_port",file_port)
 raw_input("Press Enter to continue...\n")
 
-#Writing the file to server
+# write file to server
 file = open('test.txt', 'r')
-#send_request(' 0.0.0.0',6008,data = place_holder.requested_file_details.format("test.txt","Desktop","write"))
+send_req(file_ip, file_port, config.WRITE_FILE.format(file_id, name, file.read()))
+raw_input("Press Enter to continue...\n")
 
-send_request(file_ip, file_port,data = place_holder.write_file.format(file_id, name, file.read()))
+# get lock on file
+send_req("localhost", config.LOCK_SERVER, config.REQUEST_LOCK.format(file_id, name))
+raw_input("Press Enter to continue...\n")
+
 
