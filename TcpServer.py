@@ -1,14 +1,10 @@
-import sys
 import socket
 import re
-import os
 import math
-import config
+import place_holder
 import hashlib
-from time import sleep
 from Queue import Queue
-import thread
-from threading import Thread, Lock
+from threading import Thread
 
 # define worker class that implements thread
 # base from http://code.activestate.com/recipes/577187-python-thread-pool/
@@ -62,7 +58,8 @@ class TcpServer(object):
         self.num_threads = self.MIN_THREADS
 
         # bind to port and listen for connections
-        s.bind(("0.0.0.0", port)) 
+        s.bind(("0.0.0.0", port))
+
         (self.ip, self.port) = s.getsockname()
         s.listen(5)
 
@@ -121,7 +118,7 @@ class TcpServer(object):
             if msg:
                 yield msg
                 # break if not client connecting file server
-                if self.port != config.FILE_SERVER:
+                if self.port != place_holder.file_server:
                     break
 
     # send message back to connection
@@ -152,7 +149,7 @@ class TcpServer(object):
     def propagate_msg(self, request, vars, server, response_required=True):
         # connect to socket
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.connect(("localhost", server)) 
+        s.connect(("localhost", server))
 
         # send data
         self.send_msg(s, request.format(*vars))
@@ -165,4 +162,4 @@ class TcpServer(object):
 
     # return an error message to the user
     def error(self, conn, msg):
-        self.send_msg(conn, config.ERROR_MSG.format(msg))
+        self.send_msg(conn, place_holder.error_message.format(msg))
