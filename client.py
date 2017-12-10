@@ -44,4 +44,12 @@ raw_input("Press Enter to continue...\n")
 send_req("localhost", config.LOCK_SERVER, config.REQUEST_LOCK.format(file_id, name))
 raw_input("Press Enter to continue...\n")
 
+# read file from server
+send_req(file_ip, file_port, config.READ_FILE.format(file_id, name))
+raw_input("Press Enter to continue...\n")
+
+# unlock file
+send_req("localhost", config.LOCK_SERVER, config.REQUEST_UNLOCK.format(file_id, name))
+raw_input("Press Enter to continue...\n")
+
 
