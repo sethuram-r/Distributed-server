@@ -1,20 +1,30 @@
-directory_server =  6001
-requested_file_details = "Requested_File_Name:{}\nLocated_Directory:{}\nAction:{}"
-returned_file_details = "Returned_File_Details:{}\nIp: {}\nPort: {}\n\n"
+# servers
+FILE_SERVER = 6000
+DIR_SERVER = 6001
+LOCK_SERVER = 6002
+REP_SERVER = 6003
 
-replication_server = 6002
-no_of_replication_servers = 2
-replication_server_copies = 5
-write_file = "write_file:{}\nclient:{}\ndata:{}"
+# variables
+LOCK_ATTEMPTS = 1
+REP_SERVERS = 2
+REP_SERVER_COPIES = 1
 
-lock_server = 6005
-lock_attempts = 1
+# client and directory server communication
+REQUEST_FILE_DETAILS = 'REQUEST_FILE_DETAILS: {}\nDIRECTORY: {}\nACTION: {}\n\n'
+RETURN_FILE_DETAILS = 'RETURN_FILE_DETAILS: {}\nIP: {}\nPORT: {}\n\n'
 
-requested_lock = "Requested_Lock:{}\nClient:{}"
-requested_use = "Requested_Use:{}\nClient:{}"
-requested_unlock = "Requested_Unlock:{}\nClient:{}"
+# client/replication server and lock server communication
+REQUEST_LOCK = 'REQUEST_LOCK: {}\nCLIENT: {}\n\n'
+REQUEST_USE = 'REQUEST_USE: {}\nCLIENT: {}\n\n'
+REQUEST_UNLOCK = 'REQUEST_UNLOCK: {}\nCLIENT: {}\n\n'
 
+# client and replication server communication
+WRITE_FILE = 'WRITE_FILE: {}\nCLIENT: {}\nDATA: {}\n\n'
+READ_FILE = 'READ_FILE: {}\nCLIENT: {}\n\n'
+DELETE_FILE = 'DELETE_FILE: {}\nCLIENT: {}\n\n'
+RETURN_FILE_DATA = 'RETURN_FILE_DATA: {}\n\n'
 
-read_file = "Read_File:{}\nClient:{}"
-delete_file = "Delete_File:{}\nClient:{}"
-return_file_data = "Return_File_Data\n"
+# status messages
+SUCCESS = 'SUCCESS: {}\n\n'
+FAILURE = 'FAILURE: {}\n\n'
+ERROR_MSG = 'ERROR: {}\n\n'
