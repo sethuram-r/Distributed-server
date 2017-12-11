@@ -1,25 +1,25 @@
-import sys
-import place_holder
+################################# Imported Packages #############################################
+
 import random
+import place_holder
 from TcpServer import TcpServer
 
 
-class DirectoryServer(TcpServer):
-    print(place_holder.requested_file_details)
-    messages = {place_holder.requested_file_details}
-    folders = {}
-    servers = []
-    for i in range(place_holder.no_of_replication_servers):
-        servers.append(place_holder.replication_server + (i * (place_holder.replication_server_copies + 1)))
+#################################################################################################
 
+class DirectoryServer(TcpServer):
+    messages = {place_holder.REQUEST_FILE_DETAILS}
+    servers = [place_holder.REP_SERVER + (x * (place_holder.REP_SERVER_COPIES + 1)) for x in
+               range(place_holder.REP_SERVERS)]
+    folders = {}
 
     # override request processing function
     def process_req(self, conn, request, vars):
         # requesting file details from directory
-        if request == place_holder.requested_file_details:
+        if request == place_holder.REQUEST_FILE_DETAILS:
             try:
                 # add folder to directory listing if writing
-                if vars[2] == 'write':
+                if vars[2] == 'WRITE':
                     # check if folder exists in directory listing
                     if vars[1] not in self.folders:
                         # if not then assign folder to random server
@@ -32,8 +32,8 @@ class DirectoryServer(TcpServer):
 
                 # check if file in directory
                 if vars[0] in response['files']:
-                    self.send_msg(conn,
-                                  place_holder.returned_file_details.format(response['id'], response['ip'], response['port']))
+                    self.send_msg(conn, place_holder.RETURN_FILE_DETAILS.format(response['id'], response['ip'],
+                                                                                response['port']))
                 else:
                     self.error(conn, "File not found.")
 
@@ -42,9 +42,6 @@ class DirectoryServer(TcpServer):
                 self.error(conn, "File not found.")
 
 
-def main():
-    print "Directory Server started on " + str(place_holder.directory_server)
-    server = DirectoryServer(place_holder.directory_server)
-
-
-if __name__ == "__main__": main()
+if __name__ == "__main__":
+    print "Directory Server started on " + str(place_holder.DIR_SERVER)
+    server = DirectoryServer(place_holder.DIR_SERVER)
